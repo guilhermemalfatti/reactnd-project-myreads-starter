@@ -100,7 +100,7 @@ a.button:hover, a.button:focus {
 /*
  *  Header
 */
-.page-header {
+.page-header-my-read {
   position: relative;
   margin-bottom: 55px;
   width: 100%;
@@ -859,3 +859,4 @@ a.button:hover, a.button:focus {
   font-size: 12px;
   text-align: center;
 }
+
