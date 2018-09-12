@@ -12,20 +12,19 @@ class BookItem extends Component {
     }
 
     componentDidMount(){
-        this.setState({value: this.props.bookInfo.shelf});
+        this.setState({value: this.props.bookInfo.shelf ? this.props.bookInfo.shelf : "select"});
     }
     handleChange(event) {
-
-
         if(this.props.onUpdateShelf){
-            this.props.onUpdateShelf(event, this.state.value);
+            this.props.onUpdateShelf(event, this.state.value, this.props.bookInfo);
         }
 
         this.setState({value: event.target.value});
 
     }
     render() {
-        const { bookInfo, onUpdateShelf }  = this.props
+        const { bookInfo }  = this.props
+        const { value }  = this.state
         return (
             <li className="book-item small-12 medium-6 columns" >
                 <div className="bk-img">
@@ -48,6 +47,8 @@ class BookItem extends Component {
                     <select id={bookInfo.id} className="form-control small-12 medium-3 columns categorySelect"
                             value={this.state.value}
                             onChange={this.handleChange}>
+                        <option value="select" disabled>Select</option>
+                        <option value="undefined" disabled={value === "select" ? true : null}>Remove Book</option>
                         <option value="wantToRead">Want to Read</option>
                         <option value="currentlyReading">Reading</option>
                         <option value="read">Read</option>

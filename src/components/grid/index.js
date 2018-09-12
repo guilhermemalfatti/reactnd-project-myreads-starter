@@ -14,7 +14,7 @@ class Grid extends Component {
                     {books.length > 0 ? books.map((book) => (
                         <BookItem key={book.id} bookInfo={book} onUpdateShelf={onUpdateShelf}/>
                     )) :
-                    <p className="emptyShelf">Empty shelf</p>
+                    <p className="emptyShelf">Empty List</p>
                     }
                 </ul>
             </div>

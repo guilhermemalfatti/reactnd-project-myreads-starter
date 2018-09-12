@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Container extends Component {
+class SearchList extends Component {
 
     render() {
         return (
@@ -15,4 +15,4 @@ class Container extends Component {
     }
 }
 
-export default Container
+export default SearchList
