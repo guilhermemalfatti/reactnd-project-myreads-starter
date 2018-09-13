@@ -1,3 +1,7 @@
 .categorySelect{
     background-color: #b5c7cc !important;
 }
+
+.image-cover{
+    background-size: cover;
+}

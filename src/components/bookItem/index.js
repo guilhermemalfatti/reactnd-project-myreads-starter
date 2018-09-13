@@ -38,7 +38,7 @@ class BookItem extends Component {
                     <div className="bk-wrapper">
                         <div className="bk-book bk-bookdefault">
                             <div className="bk-front">
-                                {imgURL ? <div className="bk-cover" style={{backgroundImage: `url('${imgURL}')`}}></div>:
+                                {imgURL ? <div className="bk-cover image-cover" style={{backgroundImage: `url('${imgURL}')`}}></div>:
                                           <div className="bk-cover" ></div>
                                 }
                             </div>

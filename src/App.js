@@ -28,7 +28,8 @@ class BooksApp extends Component {
     booksRead: [],
     booksWantToRead: [],
     searchList: [],
-    loading: true
+    loading: true,
+    order: 0
   }
 
   componentDidMount(){
@@ -149,6 +150,35 @@ class BooksApp extends Component {
     })
   }
 
+  onChangeOrderBy(value){
+
+    this.setState({
+      boooksCurrentlyReading : this.doSort([].concat(this.state.boooksCurrentlyReading), "title", value),
+      booksRead: this.doSort([].concat(this.state.booksRead), "title", value),
+      booksWantToRead: this.doSort([].concat(this.state.booksWantToRead), "title", value)
+    });
+
+  }
+
+  doSort(list, property, direction){
+    const dirMap = {
+      gt: { asc: 1, desc: -1 },
+      lt: { asc: -1, desc: 1 }
+    };
+
+    list.sort((a,b)=>{
+      if (a[property] < b[property]) {
+        return dirMap.lt[ direction.toLowerCase() ];
+      }
+      if (a[property] > b[property]) {
+        return dirMap.gt[ direction.toLowerCase() ];
+      }
+      return 0;
+    });
+
+    return list;
+  }
+
   render() {
     const { boooksCurrentlyReading, booksWantToRead, booksRead, loading, searchList } = this.state;
     return (
@@ -160,7 +190,7 @@ class BooksApp extends Component {
             />
           </Header>
           <Route exact path='/' render={() => (
-            <ListBooks >
+            <ListBooks onChangeOrderBy={this.onChangeOrderBy.bind(this)}>
               <Tabs
                   defaultActiveKey={1}
                   id="controlled-tab"

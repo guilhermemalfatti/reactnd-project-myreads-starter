@@ -9,9 +9,10 @@ class CatalogSearch extends Component {
         value: '',
         loading: true
     }
-    search = throttle(200, function (event) {
+
+    search = throttle(200, function (query) {
         this.setState({loading: true});
-        BooksAPI.search(event.target.value).then((res)=>{
+        BooksAPI.search(query).then((res)=>{
 
             if(this.props.onSearch){
                 this.setState({loading: false});
@@ -22,11 +23,12 @@ class CatalogSearch extends Component {
     handleChange(event) {
         this.setState({value: event.target.value});
         event.persist();
-        this.search(event);
+        this.search(event.target.value);
     }
 
     componentDidMount(){
         this.setState({loading: false});
+        this.props.onSearch([])
     }
     render() {
         const { title, value, loading }  = this.state
