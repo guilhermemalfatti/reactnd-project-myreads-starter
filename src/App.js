@@ -50,6 +50,7 @@ class BooksApp extends Component {
             readBooks.push(book);
             break;
         }
+        return true;
       });
 
       this.setState({
@@ -75,6 +76,7 @@ class BooksApp extends Component {
             });
 
           }
+          return true;
         });
         break;
       case WANTTOREAD:
@@ -85,6 +87,7 @@ class BooksApp extends Component {
               this.updateShelfState()
             });
           }
+          return true;
         });
         break;
       case READ:
@@ -95,6 +98,7 @@ class BooksApp extends Component {
               this.updateShelfState()
             });
           }
+          return true;
         });
         break;
       default:

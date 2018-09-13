@@ -1,9 +1,13 @@
-import React, { Component } from 'react'
-import BookItem from '../bookItem/index'
+import React, { Component } from 'react';
+import BookItem from '../bookItem/index';
+import PropTypes from 'prop-types';
 import './index.css';
 
 class Grid extends Component {
-
+    static propTypes = {
+        books: PropTypes.array.isRequired,
+        onUpdateShelf: PropTypes.func.isRequired
+    }
 
     render() {
         const { books, onUpdateShelf }  = this.props

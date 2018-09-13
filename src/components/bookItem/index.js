@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Moment from 'moment';
+import PropTypes from 'prop-types';
 import './index.css';
+
 class BookItem extends Component {
     constructor(props) {
         super(props);
@@ -11,8 +13,12 @@ class BookItem extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    static propTypes = {
+        bookInfo: PropTypes.object.isRequired
+    }
+
     componentDidMount(){
-        this.setState({value: this.props.bookInfo.shelf ? this.props.bookInfo.shelf : "select"});
+        this.setState({value: this.props.bookInfo.shelf ? this.props.bookInfo.shelf : "none"});
     }
     handleChange(event) {
         if(this.props.onUpdateShelf){
@@ -23,15 +29,18 @@ class BookItem extends Component {
 
     }
     render() {
-        const { bookInfo }  = this.props
-        const { value }  = this.state
+        const { bookInfo }  = this.props;
+        const imgURL = bookInfo.imageLinks ? bookInfo.imageLinks.thumbnail : null;
+        const { value }  = this.state;
         return (
             <li className="book-item small-12 medium-6 columns" >
                 <div className="bk-img">
                     <div className="bk-wrapper">
                         <div className="bk-book bk-bookdefault">
                             <div className="bk-front">
-                                <div className="bk-cover" style={{backgroundImage: `url('${bookInfo.imageLinks.thumbnail}')`}}></div>
+                                {imgURL ? <div className="bk-cover" style={{backgroundImage: `url('${imgURL}')`}}></div>:
+                                          <div className="bk-cover" ></div>
+                                }
                             </div>
                             <div className="bk-back"></div>
                             <div className="bk-left"></div>
@@ -40,15 +49,15 @@ class BookItem extends Component {
                     </div>
                 <div className="item-details">
                     <h3 className="book-item_title">{bookInfo.title}</h3>
-                    {bookInfo.authors.map((author) => (
+                    {bookInfo.authors ? bookInfo.authors.map((author) => (
                         <p key={author} className="author">{author} &bull; {Moment(bookInfo.publishedDate).format('YYYY')}</p>
-                    ))}
-                    <p>{bookInfo.description}</p>
+                    )) : '-' }
+                    <p>{bookInfo.description ? bookInfo.description : '-'}</p>
                     <select id={bookInfo.id} className="form-control small-12 medium-3 columns categorySelect"
                             value={this.state.value}
                             onChange={this.handleChange}>
-                        <option value="select" disabled>Select</option>
-                        <option value="undefined" disabled={value === "select" ? true : null}>Remove Book</option>
+                        <option value="none" disabled>None</option>
+                        <option value="undefined" disabled={value === "none" ? true : null}>Remove Book</option>
                         <option value="wantToRead">Want to Read</option>
                         <option value="currentlyReading">Reading</option>
                         <option value="read">Read</option>
