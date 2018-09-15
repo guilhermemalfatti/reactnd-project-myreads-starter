@@ -1,5 +1,7 @@
 {
+  "homepage": "https://guilhermemalfatti.github.io/reactnd-project-myreads-starter/",
   "dependencies": {
+    "gh-pages": "^1.2.0",
     "moment": "^2.22.2",
     "prop-types": "^15.6.2",
     "react": "^16.3.2",
@@ -14,6 +16,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
