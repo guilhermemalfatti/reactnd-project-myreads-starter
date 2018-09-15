@@ -15,6 +15,10 @@ class OrderBy extends Component {
         })
     }
 
+    /**
+     * @description Handle the Select component value change
+     * @param {object} event - The event
+     */
     handleChange(event){
         this.setState({
             value: event.target.value

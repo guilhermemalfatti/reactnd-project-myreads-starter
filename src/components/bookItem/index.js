@@ -20,6 +20,11 @@ class BookItem extends Component {
     componentDidMount(){
         this.setState({value: this.props.bookInfo.shelf ? this.props.bookInfo.shelf : "none"});
     }
+
+    /**
+     * @description Handle the Select component value change
+     * @param {object} event - The event
+     */
     handleChange(event) {
         if(this.props.onUpdateShelf){
             this.props.onUpdateShelf(event, this.state.value, this.props.bookInfo);

@@ -15,6 +15,9 @@ const WANTTOREAD = 'wantToRead';
 const CURRENTLYREADING = 'currentlyReading';
 const READ = 'read';
 
+/**
+* @description Represents the App
+*/
 class BooksApp extends Component {
 
   constructor(props) {
@@ -64,6 +67,12 @@ class BooksApp extends Component {
 
   }
 
+  /**
+  * @description Update the shelf
+  * @param {object} event - The title of the book
+  * @param {string} currentState - the current state of the book
+  * @param {object} bookInfo - The book
+  */
   onUpdateShelf = (event, currentState, bookInfo) => {
     this.setState({loading: true});
     switch (currentState) {
@@ -114,6 +123,9 @@ class BooksApp extends Component {
     }
   }
 
+  /**
+  * @description Update the shelf state
+  */
   updateShelfState(){
     let allBooks = [this.state.boooksCurrentlyReading, this.state.booksRead,this.state.booksWantToRead];
     this.setState({
@@ -124,12 +136,21 @@ class BooksApp extends Component {
     })
   }
 
+  /**
+  * @description Filter the book by the shelf
+  * @param {list} allBooks - The book list
+  * @param {string} shelf - The shelf to be filtered
+  */
   filterBooks(allBooks, shelf){
     return allBooks.reduce((a,b)=>{
       return a.concat(b);
     }).filter((b)=> b.shelf === shelf);
   }
 
+  /**
+  * @description Manage the seacrh list, based in the current books already categorized by shelves
+  * @param {list} searchList - The result of search page
+  */
   handleSearch(searchList){
     let allShelfBooks = [this.state.boooksCurrentlyReading, this.state.booksRead,this.state.booksWantToRead];
 
@@ -150,16 +171,26 @@ class BooksApp extends Component {
     })
   }
 
-  onChangeOrderBy(value){
+  /**
+  * @description Update the books lists, based in the Order By component
+  * @param {string} direction - The direction of the sort
+  */
+  onChangeOrderBy(direction){
 
     this.setState({
-      boooksCurrentlyReading : this.doSort([].concat(this.state.boooksCurrentlyReading), "title", value),
-      booksRead: this.doSort([].concat(this.state.booksRead), "title", value),
-      booksWantToRead: this.doSort([].concat(this.state.booksWantToRead), "title", value)
+      boooksCurrentlyReading : this.doSort([].concat(this.state.boooksCurrentlyReading), "title", direction),
+      booksRead: this.doSort([].concat(this.state.booksRead), "title", direction),
+      booksWantToRead: this.doSort([].concat(this.state.booksWantToRead), "title", direction)
     });
 
   }
 
+  /**
+  * @description Sort a list
+  * @param {list} list - The list
+  * @param {string} property - The property to be sorted
+  * @param {string} direction - The direction
+  */
   doSort(list, property, direction){
     const dirMap = {
       gt: { asc: 1, desc: -1 },

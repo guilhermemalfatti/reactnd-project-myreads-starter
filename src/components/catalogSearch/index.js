@@ -10,6 +10,10 @@ class CatalogSearch extends Component {
         loading: true
     }
 
+    /**
+     * @description This method revolves around a time interval and handle the query search.
+     * @param {string} query - The query
+     */
     search = throttle(200, function (query) {
         this.setState({loading: true});
         BooksAPI.search(query).then((res)=>{
@@ -20,6 +24,11 @@ class CatalogSearch extends Component {
             }
         });
     });
+
+    /**
+     * @description Handle the Input component value change
+     * @param {object} event - The event
+     */
     handleChange(event) {
         this.setState({value: event.target.value});
         event.persist();
